@@ -359,3 +359,6 @@ path.win { fill: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
+
+/* Защита картинок: без перетаскивания и без меню «сохранить» при долгом нажатии */
+img { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
