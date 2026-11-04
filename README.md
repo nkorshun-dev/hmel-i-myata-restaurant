@@ -2,7 +2,7 @@
 
 Демо-проект для портфолио: вымышленный ресторан современной белорусской кухни и крафтового пива в Минске. Можно выбрать не просто время, а конкретный столик на интерактивной схеме зала. Бизнес вымышленный, брони никуда не отправляются.
 
-Демо: https://nkorshun-restaurant.netlify.app.
+Демо: https://nkorshun.dev/hmel-i-myata/.
 
 ## Скриншоты (места)
 
@@ -66,7 +66,7 @@ npx serve -l 5195 .
 1. Залить папку в репозиторий (или перетащить в Netlify Drop).
 2. Build command пустой, publish directory `.` (уже в `netlify.toml`).
 3. В `netlify.toml` настроены заголовки безопасности (CSP, X-Frame-Options и др.) и кэширование. `404.html` Netlify подхватывает сам.
-4. Замените домен `nkorshun-restaurant.netlify.app` в canonical и Open Graph на свой.
+4. Замените домен `nkorshun.dev/hmel-i-myata` в canonical и Open Graph на свой.
 
 ## Проверка
 
