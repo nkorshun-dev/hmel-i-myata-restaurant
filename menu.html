@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Меню — Хмель и Мята, Минск</title>
+<meta name="description" content="Полное меню ресторана «Хмель и Мята»: белорусская кухня, бургеры, паста, десерты и 14 сортов крафтового пива. Фильтры по диетам и аллергенам.">
+<link rel="canonical" href="https://nkorshun-restaurant.netlify.app/menu.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Хмель и Мята">
+<meta property="og:title" content="Меню — Хмель и Мята">
+<meta property="og:description" content="Белорусская кухня, крафтовое пиво, фильтры по диетам и аллергенам.">
+<meta property="og:url" content="https://nkorshun-restaurant.netlify.app/menu.html">
+<meta property="og:image" content="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&h=630&q=70">
+<meta name="theme-color" content="#141210">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Playfair+Display:wght@500;700&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="menu">
+<header class="header" id="site-header"></header>
+<main id="main">
+<section class="wrap pagehead">
+  <p class="eyebrow">Меню</p>
+  <h1>Кухня и кран</h1>
+  <p class="lead">Отметьте, что вам подходит, и уберите то, что нельзя. Фильтры сохраняются в адресе страницы, ими можно поделиться.</p>
+</section>
+
+<section class="wrap filters" aria-label="Фильтры меню">
+  <div class="filters__row">
+    <label class="search"><span class="sr-only">Поиск по названию и составу</span><input type="search" id="q" placeholder="Поиск: драники, утка, грибы" autocomplete="off"></label>
+  </div>
+  <div class="filters__group"><p class="filters__h" id="fh1">Показать только</p><div class="chips" id="tag-chips" role="group" aria-labelledby="fh1"></div></div>
+  <div class="filters__group"><p class="filters__h" id="fh2">Исключить аллергены</p><div class="chips" id="allergen-chips" role="group" aria-labelledby="fh2"></div></div>
+  <div class="filters__foot"><p id="count" class="muted" role="status" aria-live="polite"></p><button type="button" class="link-btn" id="reset" hidden>Сбросить фильтры</button></div>
+</section>
+
+<nav class="catnav" id="catnav" aria-label="Категории меню"></nav>
+
+<div class="wrap" id="menu-list"></div>
+
+<section class="wrap section" id="beer" aria-labelledby="beer-h">
+  <p class="eyebrow">14 кранов</p>
+  <h2 id="beer-h">Пиво на кране</h2>
+  <p class="muted">Фильтры выше относятся к блюдам. Цены за 0,3 и 0,5 л, BYN.</p>
+  <div class="grid grid--beer" id="beer-list"></div>
+</section>
+</main>
+<footer class="footer" id="site-footer"></footer>
+<script type="module" src="js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Бронирование столика — Хмель и Мята, Минск</title>
+<meta name="description" content="Забронируйте столик в «Хмель и Мята» по схеме зала: выберите дату, время, число гостей и конкретный стол у окна, у камина или на диване.">
+<link rel="canonical" href="https://nkorshun-restaurant.netlify.app/booking.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Хмель и Мята">
+<meta property="og:title" content="Бронь столика по схеме зала — Хмель и Мята">
+<meta property="og:description" content="Выберите дату, время и конкретный столик на схеме зала.">
+<meta property="og:url" content="https://nkorshun-restaurant.netlify.app/booking.html">
+<meta property="og:image" content="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&h=630&q=70">
+<meta name="theme-color" content="#141210">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Playfair+Display:wght@500;700&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="booking">
+<header class="header" id="site-header"></header>
+<main id="main">
+<section class="wrap pagehead">
+  <p class="eyebrow">Бронь</p>
+  <h1>Забронировать столик</h1>
+</section>
+
+<div class="wrap booking">
+  <div class="booking__main">
+    <div class="panel mine" id="mine" hidden>
+      <h2 class="h3">Ваши брони</h2>
+      <ul id="mine-list" class="mine__list"></ul>
+    </div>
+
+    <ol class="steps" aria-label="Шаги бронирования">
+      <li data-i="1" class="on">Параметры</li><li data-i="2">Столик</li><li data-i="3">Контакты</li>
+    </ol>
+
+    <section class="panel step" data-step="1">
+      <h2>Дата, время и гости</h2>
+      <fieldset class="fs"><legend>Дата (ближайшие 30 дней)</legend><div class="cal" id="cal"></div></fieldset>
+      <fieldset class="fs"><legend>Время</legend><div class="slots" id="slots"></div><p class="muted small" id="slots-note"></p></fieldset>
+      <div class="fs">
+        <p class="legend" id="g-label">Количество гостей</p>
+        <div class="stepper" role="group" aria-labelledby="g-label">
+          <button type="button" class="round" id="g-minus" aria-label="Меньше гостей">&minus;</button>
+          <output id="g-val" aria-live="polite">2</output>
+          <button type="button" class="round" id="g-plus" aria-label="Больше гостей">+</button>
+        </div>
+        <p class="muted small" id="g-hint"></p>
+      </div>
+      <label class="fs">Повод (необязательно)<select id="occasion"></select></label>
+      <div class="btn-row"><button type="button" class="btn" id="next1">Выбрать столик</button></div>
+    </section>
+
+    <section class="panel step" data-step="2" hidden>
+      <h2>Выберите столик</h2>
+      <div class="seg-row" id="halls" role="group" aria-label="Зал"></div>
+      <p class="note" id="hall-note"></p>
+      <p class="note" id="banq-note" hidden>Для компании от 9 человек подходит банкетный зал. <a href="index.html#banquets">Оставить заявку</a></p>
+      <div id="floor"></div>
+      <ul class="legend-list" aria-label="Обозначения">
+        <li><i class="dot dot--free"></i>свободен</li><li><i class="dot dot--sel"></i>выбран</li><li><i class="dot dot--busy"></i>занят</li><li><i class="dot dot--dim"></i>не подходит по числу мест</li>
+      </ul>
+      <p class="muted small">Подходят столики на столько же мест или на два больше, чем гостей. Стрелки на клавиатуре перемещают между столиками, Enter выбирает.</p>
+      <div class="btn-row"><button type="button" class="btn btn--ghost" id="auto">Подобрать автоматически</button></div>
+      <details class="alt"><summary>Список подходящих столиков</summary><ul id="tlist"></ul></details>
+      <div class="btn-row btn-row--split"><button type="button" class="btn btn--ghost" id="back2">Назад</button><button type="button" class="btn" id="next2" disabled>Далее</button></div>
+    </section>
+
+    <section class="panel step" data-step="3" hidden>
+      <h2>Контакты</h2>
+      <form id="form" class="form" novalidate>
+        <label>Имя<input id="f-name" name="name" autocomplete="name" maxlength="60" aria-describedby="f-name-err" required></label>
+        <p class="err" id="f-name-err" role="alert"></p>
+        <label>Телефон<input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 (29) 123-45-67" aria-describedby="f-phone-err" required></label>
+        <p class="err" id="f-phone-err" role="alert"></p>
+        <label>Пожелания<textarea id="f-wish" name="wish" rows="3" aria-describedby="f-wish-err wish-count"></textarea></label>
+        <div class="wish-foot"><div class="chips" id="chips" role="group" aria-label="Быстрые пожелания">
+          <button type="button" class="chip" data-chip="детский стул">детский стул</button><button type="button" class="chip" data-chip="у окна">у окна</button><button type="button" class="chip" data-chip="день рождения">день рождения</button></div>
+          <span class="muted small" id="wish-count">0 / 300</span></div>
+        <p class="err" id="f-wish-err" role="alert"></p>
+        <label class="check"><input type="checkbox" id="f-consent" aria-describedby="f-consent-err" required><span>Согласен на обработку данных для брони. Это демо: данные остаются в вашем браузере.</span></label>
+        <p class="err" id="f-consent-err" role="alert"></p>
+        <div class="btn-row btn-row--split"><button type="button" class="btn btn--ghost" id="back3">Назад</button><button type="submit" class="btn" id="submit">Забронировать</button></div>
+        <p class="demo">Демо-режим: бронь никуда не отправляется</p>
+      </form>
+    </section>
+
+    <section class="panel" id="done" hidden></section>
+  </div>
+
+  <aside class="booking__side" aria-label="Сводка брони">
+    <div class="panel sticky">
+      <h2 class="h3">Ваша бронь</h2>
+      <div id="summary-body" aria-live="polite" aria-atomic="true"></div>
+    </div>
+  </aside>
+</div>
+<p class="sr-only" id="live" role="status" aria-live="polite"></p>
+</main>
+<footer class="footer" id="site-footer"></footer>
+<script type="module" src="js/booking.js"></script>
+</body>
+</html>

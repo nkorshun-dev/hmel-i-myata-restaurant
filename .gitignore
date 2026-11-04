@@ -1,0 +1,22 @@
+node_modules/
+.netlify/
+.DS_Store
+Thumbs.db
+*.log
+.env
+
+# Служебные и сборка (только локально)
+node_modules/
+dist/
+.next/
+out/
+.netlify/
+.env
+.env.*
+*.tsbuildinfo
+.claude/
+.impeccable/
+PROJECT.md
+AUDIT.md
+0[0-9]-*.md
+_backup-до-редизайна/
