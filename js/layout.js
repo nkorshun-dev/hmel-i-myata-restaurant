@@ -24,7 +24,7 @@ export function mountLayout() {
 <div class="header__in">
 <a class="logo" href="index.html" aria-label="Хмель и Мята, на главную">${LOGO}<span>Хмель и Мята</span></a>
 <nav class="nav" id="nav" aria-label="Основная навигация">${links}</nav>
-<a class="header__tel" href="tel:${CONTACTS.phoneRaw}">${CONTACTS.phone}</a>
+<span class="header__tel demo-link" aria-label="Телефон ${CONTACTS.phone} (в демо не активно)" title="Демо-проект: ссылка не активна">${CONTACTS.phone}</span>
 <a class="btn btn--sm header__cta" href="booking.html">Забронировать</a>
 <button class="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Открыть меню"><span></span><span></span><span></span></button>
 </div>`;
@@ -32,7 +32,7 @@ export function mountLayout() {
   $('#site-footer').innerHTML = `<div class="wrap footer__in">
 <div><a class="logo" href="index.html">${LOGO}<span>Хмель и Мята</span></a><p class="muted">Современная белорусская кухня и крафтовое пиво. ${CONTACTS.address}</p></div>
 <div><p class="footer__h">Разделы</p>${links}</div>
-<div><p class="footer__h">Связь</p><a href="tel:${CONTACTS.phoneRaw}">${CONTACTS.phone}</a><a href="tel:${CONTACTS.phone2Raw}">${CONTACTS.phone2}</a><a href="${CONTACTS.instagramUrl}" rel="noopener noreferrer" target="_blank">Instagram ${CONTACTS.instagram}</a></div>
+<div><p class="footer__h">Связь</p><span class="demo-link" aria-label="Телефон ${CONTACTS.phone} (в демо не активно)" title="Демо-проект: ссылка не активна">${CONTACTS.phone}</span><span class="demo-link" aria-label="Телефон ${CONTACTS.phone2} (в демо не активно)" title="Демо-проект: ссылка не активна">${CONTACTS.phone2}</span><span class="demo-link" aria-label="Instagram (в демо не активно)" title="Демо-проект: ссылка не активна">Instagram ${CONTACTS.instagram}</span></div>
 </div>
 <div class="wrap footer__bottom"><button class="link-btn" type="button" id="privacy-open">Политика конфиденциальности</button><span>Демо-проект для портфолио. Бизнес вымышленный</span></div>`;
 

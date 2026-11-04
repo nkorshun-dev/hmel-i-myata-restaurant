@@ -6,7 +6,6 @@ export const CONTACTS = {
   phone2: '+375 17 366-45-12',
   phone2Raw: '+375173664512',
   instagram: '@hmel_i_myata',
-  instagramUrl: 'https://www.instagram.com/',
 };
 
 export const LUNCH = {

@@ -81,6 +81,10 @@ const stars = (n) => `<span class="stars" role="img" aria-label="Оценка ${
 const longDate = (s) => { const [y, m, d] = s.split('-').map(Number); return `${d} ${MONTHS_GEN[m - 1]} ${y}`; };
 const rv = $('#reviews');
 rv.innerHTML = REVIEWS.map((r) => `<article class="review">${stars(r.rating)}<p class="review__text">${esc(r.text)}</p><p class="review__who"><strong>${esc(r.name)}</strong><span class="muted">${esc(r.occasion)} · ${longDate(r.date)}</span></p>${r.reply ? `<div class="review__reply"><strong>Ответ ресторана</strong><p>${esc(r.reply)}</p></div>` : ''}</article>`).join('');
+const syncRv = () => $$('[data-rv]').forEach((b) => b.setAttribute('aria-disabled', String(Number(b.dataset.rv) < 0 ? rv.scrollLeft <= 1 : rv.scrollLeft >= rv.scrollWidth - rv.clientWidth - 1)));
+rv.addEventListener('scroll', syncRv, { passive: true });
+addEventListener('resize', syncRv);
+syncRv();
 $$('[data-rv]').forEach((b) => b.addEventListener('click', () => {
   rv.scrollBy({ left: Number(b.dataset.rv) * Math.min(rv.clientWidth * 0.9, 420), behavior: 'smooth' });
 }));
