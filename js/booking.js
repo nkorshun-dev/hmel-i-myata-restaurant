@@ -7,7 +7,7 @@ import { mountLayout } from './layout.js';
 import { maskPhone } from './phone-mask.js';
 import { validateName, validatePhone, validateWish, validateConsent, WISH_MAX } from './validation.js';
 
-const KEY = 'hm_bookings';
+const KEY = 'hmel-i-myata:bookings';
 const DEPOSIT = 30; // BYN с человека для компании от 6 гостей
 const OCCASIONS = ['Без повода', 'День рождения', 'Годовщина', 'Деловая встреча', 'Свидание', 'Другое'];
 const MONTH_SHORT = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];

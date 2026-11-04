@@ -1,0 +1,71 @@
+# Шаблон автодеплоя демо-сайта на https://nkorshun.dev/<slug>/
+# Копируется в каждый репозиторий демо как .github/workflows/deploy.yml с заменой hmel-i-myata и static.
+#   static: static — файлы как есть; build — npm ci && npm run build, папка сборки ..
+# Сервер сам вставляет noindex и кнопку «← Портфолио» во все HTML (deploy/server/nk-deploy-demo).
+# Секреты репозитория: DEMO_DEPLOY_KEY, DEPLOY_KNOWN_HOSTS.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-demo
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  SLUG: hmel-i-myata
+  TYPE: static
+  OUT: .
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        if: env.TYPE == 'build'
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Build
+        if: env.TYPE == 'build'
+        run: |
+          npm ci
+          npm run build
+
+      - name: Package
+        run: |
+          if [ "$TYPE" = static ]; then
+            tar -czf site.tgz --exclude=.git --exclude=.github --exclude=.netlify --exclude=netlify.toml \
+              --exclude='_backup*' --exclude='*.md' --exclude=node_modules --exclude=site.tgz .
+          else
+            tar -czf site.tgz -C "$OUT" .
+          fi
+          ls -lh site.tgz
+
+      - name: Upload and switch
+        env:
+          KEY: ${{ secrets.DEMO_DEPLOY_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          ssh -i ~/.ssh/deploy -o BatchMode=yes deploy@78.17.19.128 "deploy $SLUG" < site.tgz
+
+      - name: Check https://nkorshun.dev/${{ env.SLUG }}/
+        run: |
+          for i in 1 2 3 4 5; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://nkorshun.dev/$SLUG/")
+            [ "$code" = 200 ] && { echo "200 OK"; exit 0; }
+            sleep 3
+          done
+          echo "Сайт ответил $code — откат"; ssh -i ~/.ssh/deploy deploy@78.17.19.128 "rollback $SLUG"; exit 1
