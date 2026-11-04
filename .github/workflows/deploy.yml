@@ -44,12 +44,12 @@ jobs:
       - name: Package
         run: |
           if [ "$TYPE" = static ]; then
-            tar -czf site.tgz --exclude=.git --exclude=.github --exclude=.netlify --exclude=netlify.toml \
-              --exclude='_backup*' --exclude='*.md' --exclude=node_modules --exclude=site.tgz .
+            tar -czf "$RUNNER_TEMP/site.tgz" --exclude=.git --exclude=.github --exclude=.netlify --exclude=netlify.toml \
+              --exclude='_backup*' --exclude='*.md' --exclude=node_modules .
           else
-            tar -czf site.tgz -C "$OUT" .
+            tar -czf "$RUNNER_TEMP/site.tgz" -C "$OUT" .
           fi
-          ls -lh site.tgz
+          ls -lh "$RUNNER_TEMP/site.tgz"
 
       - name: Upload and switch
         env:
@@ -59,7 +59,7 @@ jobs:
           install -m 700 -d ~/.ssh
           printf '%s\n' "$KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
           printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
-          ssh -i ~/.ssh/deploy -o BatchMode=yes deploy@78.17.19.128 "deploy $SLUG" < site.tgz
+          ssh -i ~/.ssh/deploy -o BatchMode=yes deploy@78.17.19.128 "deploy $SLUG" < "$RUNNER_TEMP/site.tgz"
 
       - name: Check https://nkorshun.dev/${{ env.SLUG }}/
         run: |
