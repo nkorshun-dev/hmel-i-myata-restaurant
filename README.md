@@ -23,7 +23,15 @@
 
 ## Стек
 
-HTML5, CSS3, ванильный JavaScript (ES-модули), SVG. Без сборки и зависимостей. Шрифты Playfair Display и Manrope (Google Fonts), фото Unsplash.
+HTML5, CSS3, ванильный JavaScript (ES-модули), SVG. Без сборки и зависимостей. Шрифты Playfair Display и Manrope локально (исходники Google Fonts), фото Unsplash.
+
+## Локальные ресурсы первого экрана
+
+Hero хранится в `img/hero-{640,1024,1600,2400}.{avif,webp}`, подключён через picture/srcset и preload. Значения sizes учитывают `object-fit: cover`, чтобы высокий мобильный hero не растягивал слишком маленький landscape-файл. Исходное фото и crop сохранены; H1 не скрыт reveal-анимацией. Высота шапки зарезервирована до её вставки через JS.
+
+Шрифты Manrope 400/500/700 и Playfair Display 500/700 загружаются из `fonts/*.woff2` с `font-display: swap`; кириллические файлы предзагружаются на index/menu/booking/404. Проверка бинарных таблиц подтверждает: `manrope-400-*` — variable `wght 200–800`, `playfair-display-500-*` — variable `wght 400–900`; все объявленные веса входят в эти диапазоны. Evidence: [font-axes.txt](../.qa-codex-continuation/font-axes.txt).
+
+Лицензии SIL OFL 1.1: [Manrope](fonts/OFL-Manrope.txt), [Playfair Display](fonts/OFL-PlayfairDisplay.txt); оригиналы: [google/fonts main ofl/manrope](https://github.com/google/fonts/blob/main/ofl/manrope/OFL.txt), [ofl/playfairdisplay](https://github.com/google/fonts/blob/main/ofl/playfairdisplay/OFL.txt).
 
 ## Как устроена схема зала
 
