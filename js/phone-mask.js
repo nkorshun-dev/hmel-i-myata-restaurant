@@ -1,10 +1,8 @@
 // Маска +375 (XX) XXX-XX-XX.
 export function formatPhone(raw) {
-  let d = raw.replace(/\D/g, '');
-  if (d.startsWith('375')) d = d.slice(3);
-  else if (d.startsWith('80')) d = d.slice(2);
-  else if ('375'.startsWith(d)) d = ''; // стёрли префикс
-  d = d.slice(0, 9);
+  // «+375» маски (или его стёртая часть) — не номер; затем снимаем набранный пользователем 375/80:
+  // кодов оператора на 37 и 80 нет, поэтому «+375 (375…» и «+375 (80…» — это префикс, а не номер.
+  const d = raw.replace(/^\s*\+(375|37|3)?/, '').replace(/\D/g, '').replace(/^375/, '').replace(/^80/, '').slice(0, 9);
   let out = '+375';
   if (d.length) out += ' (' + d.slice(0, 2);
   if (d.length >= 2) out += ') ' + d.slice(2, 5);
